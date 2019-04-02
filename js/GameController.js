@@ -6,7 +6,9 @@ class GameController {
         this.reelNumber = 5;
         this.symbolNumber = 3;
         this.symbolList = [];
-        this.priceLines = [1]
+        this.priceLines = [1];
+        this.priceImg = new Image();
+        this.priceImg.src = "./images/premio.png";
        
     }
 
@@ -37,12 +39,13 @@ class GameController {
 
             this.framesCounter++;
 
-            // controlamos que frameCounter no sea superior a 1000
-            if (this.framesCounter > 1000) {
+            // controlamos que frameCounter no sea superior a 10000
+            if (this.framesCounter > 10000) {
                 this.framesCounter = 0;
             }
 
             this.panel.draw(this.ctx);
+            this.drawPrices();
 
         }.bind(this), 1000 / this.fps);
     }
@@ -95,7 +98,17 @@ class GameController {
         })
 
         document.getElementById("reward").innerHTML = this.panel.reward;
-    }
 
+        
+    }
+    drawPrices(){
+        if(this.panel.reward > 0){
+            this.ctx.drawImage(
+                this.priceImg,
+                100,
+                100
+            );
+        }
+    }
 
 }
